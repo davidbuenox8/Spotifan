@@ -31,9 +31,6 @@ router.post('/signup', (req, res, next) => {
         User.create({ username: username, password: hash })
           .then(createdUser => {
             console.log(createdUser);
-            // log the user in immediately
-            // req.session.user = createdUser; -> this is the 'node-basic'auth-way'
-            // this is the passport login
             req.login(createdUser, err => {
               if (err) {
                 return res.status(500).json({ message: 'Error while attempting to login' })
@@ -79,6 +76,17 @@ router.get('/loggedin', (req, res) => {
 router.delete('/logout', (req, res) => {
   req.logout();
   res.status(200).json({ message: 'Successful Logout' })
+})
+
+router.get('/user', (req, res) => {
+  console.log('this is the user from the session: ', req.user);
+  User.findById(req.user._id).populate('followedArtists')
+    .then(user => {
+      user.followedArtists.filter(artist => { artist.artistId });
+      res.status(200).json(user)
+
+    })
+
 })
 
 module.exports = router;

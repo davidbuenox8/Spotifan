@@ -21,6 +21,8 @@ export default class Profile extends React.Component {
         <Navbar />
         <Link to='/' onClick={this.handleLogout}>Log Out</Link>
         <h1>User Profile</h1>
+        <h2>Listen Later</h2>
+        <h2>Followed Artists</h2>
       </div>
     )
   }

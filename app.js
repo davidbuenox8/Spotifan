@@ -18,68 +18,6 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
-//spotify starts
-
-const SpotifyWebApi = require('spotify-web-api-node');
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET
-});
-
-// Retrieve an access token
-spotifyApi
-  .clientCredentialsGrant()
-  .then(data => spotifyApi.setAccessToken(data.body['access_token']))
-  .catch(error => console.log('Something went wrong when retrieving an access token', error));
-
-app.get('/artist-search/:name', (req, res) => {
-
-  spotifyApi
-    .searchArtists(req.params.name)
-    .then(data => {
-      res.status(200).json(data.body.artists.items)
-    })
-    .catch(err => console.log('The error while searching artists occurred: ', err));
-})
-
-app.get('/artist/:id', (req, res) => {
-  spotifyApi.getArtist(req.params.id)
-    .then(data => {
-      res.status(200).json(data)
-    })
-    .catch(err => console.log(err));
-})
-
-app.get('/albums/:artistId', (req, res) => {
-  spotifyApi.getArtistAlbums(req.params.artistId)
-    .then(data => {
-      res.status(200).json(data)
-    })
-    .catch(err => console.log(err));
-
-})
-
-
-app.get('/album/:albumId', (req, res) => {
-
-  spotifyApi.getAlbumTracks(req.params.albumId)
-    .then(data => {
-      res.status(200).json(data.body.items)
-    })
-    .catch(err => console.log(err));
-
-})
-
-
-
-
-
-
-
-
-
-
 // session configuration
 
 const session = require('express-session');
@@ -155,6 +93,102 @@ app.use(passport.session());
 
 // end of passport configuration
 
+
+
+
+//spotify starts
+
+const SpotifyWebApi = require('spotify-web-api-node');
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET
+});
+
+// Retrieve an access token
+spotifyApi
+  .clientCredentialsGrant()
+  .then(data => spotifyApi.setAccessToken(data.body['access_token']))
+  .catch(error => console.log('Something went wrong when retrieving an access token', error));
+
+app.get('/artist-search/:name', (req, res) => {
+
+  spotifyApi
+    .searchArtists(req.params.name)
+    .then(data => {
+      res.status(200).json(data.body.artists.items)
+    })
+    .catch(err => console.log('The error while searching artists occurred: ', err));
+})
+
+app.get('/artist/:id', (req, res) => {
+  spotifyApi.getArtist(req.params.id)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => console.log(err));
+})
+
+app.get('/albums/:artistId', (req, res) => {
+  spotifyApi.getArtistAlbums(req.params.artistId)
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => console.log(err));
+})
+
+
+/* app.get('/followedArtistsTracks', (req, res) => {
+
+  User.findById(req.user._id).populate('followedArtists')
+    .then(arrayArtists => {
+      arrayArtists.followedArtists.forEach(artist => {
+        spotifyApi.getArtistAlbums(artist.artistIdFromSpotify)
+          .then(data => {
+            console.log(data.body.items)
+            res.status(200).json(data.body.items)
+          })
+          .catch(err => console.log(err));
+      })
+    })
+}) */
+
+app.get('/followedArtistsTracks', (req, res) => {
+  User.findById(req.user._id).populate('followedArtists')
+    .then(arrayArtists => {
+      const followArtistDataArr = [];
+      arrayArtists.followedArtists.forEach(artist => {
+        spotifyApi.getArtistAlbums(artist.artistIdFromSpotify)
+          .then(eachFollowArtistData => {
+            followArtistDataArr.push(eachFollowArtistData.body.items)
+          })
+          .catch(err => { console.log(err) })
+      })
+        .then(() => { console.log('THE FINAL ARRAY', followArtistDataArr) })
+    })
+    .catch(err => console.log(err))
+})
+
+
+/* Promise.all(promises).then(finalData => {
+  res.status(200).json(finalData)
+  }) */
+
+
+/*  const mergedData = [].concat.apply([], followArtistDataArr) */
+
+
+app.get('/album/:albumId', (req, res) => {
+
+  spotifyApi.getAlbumTracks(req.params.albumId)
+    .then(data => {
+      res.status(200).json(data.body.items)
+    })
+    .catch(err => console.log(err));
+
+})
+
+
 // default value for title local
 const projectName = "spotifan";
 const capitalized = (string) =>
@@ -165,6 +199,9 @@ app.locals.title = `${capitalized(projectName)} created with Ironlauncher`;
 // 👇 Start handling routes here
 const auth = require("./routes/auth");
 app.use("/api/auth", auth);
+
+const artists = require('./routes/artists');
+app.use('/api/artists', artists)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

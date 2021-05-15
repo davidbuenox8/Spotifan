@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -48,7 +48,7 @@ class App extends React.Component {
             user={this.state.user}
             component={Profile}
             redirectPath='/login'
-            user={this.state.user} setUser={this.setUser}
+            setUser={this.setUser}
           />
 
           <ProtectedRoute

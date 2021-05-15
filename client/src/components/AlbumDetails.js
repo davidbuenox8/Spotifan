@@ -6,7 +6,7 @@ export default class AlbumDetails extends React.Component {
 
   state = {
     tracks: [],
-    url: ''
+
   }
 
   getTracks = () => {
@@ -15,7 +15,7 @@ export default class AlbumDetails extends React.Component {
         console.log(response.data)
         this.setState({
           tracks: response.data,
-          url: response.data[0].external_urls.spotify
+
         })
       })
   }

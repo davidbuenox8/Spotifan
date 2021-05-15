@@ -9,12 +9,19 @@ export default class Dashboard extends Component {
   }
 
   getData = () => {
-
+    axios.get('/followedArtistsTracks')
+      .then(response => {
+        console.log(response)
+        this.setState({
+          track: response.data
+        })
+      })
+      .catch(err => console.log(err))
   }
 
-  /*   componentDidMount() {
-      this.getData();
-    } */
+  componentDidMount() {
+    this.getData();
+  }
 
   render() {
     return (

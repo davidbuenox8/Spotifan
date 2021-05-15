@@ -1,18 +1,19 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema({
+  artistObj: Object,
   name: String,
   avatar: String,
-  ArtistId: String,
+  artistIdFromSpotify: String,
   likedTracks: [{
     trackId: String
   }],
   listenLater: [{
     trackId: String
   }],
+  follow: Boolean
 });
 
-const Aritst = model("Artist", userSchema);
+const Artist = model("Artist", userSchema);
 
 module.exports = Artist;

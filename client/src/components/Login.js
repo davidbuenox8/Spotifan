@@ -38,32 +38,48 @@ export default class Login extends Component {
   render() {
 
     return (
-      <div>
-        <h2>Login</h2>
+      <div className='homepage'>
+        <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Username: </label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
-          <label htmlFor="password">Password: </label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <button type="submit">Log in</button>
+          <div className='userpasscontainer'>
+
+            <label htmlFor="username"> <strong> Username:</strong> </label>
+            <input
+              id="username"
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+
+
+
+
+            <label htmlFor="password"><strong>Password:</strong> </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+
+          </div>
+          <div className='logcontainer'>
+            <div className='signup'>
+
+              <a href="/"><strong>Back</strong></a>
+            </div>
+            <div className='signup'>
+
+              <button type="submit"><strong>Log in</strong></button>
+            </div>
+          </div>
           {this.state.message && (
             <h3>{this.state.message}</h3>
           )}
         </form>
-        <a href="/">Back to Home Page</a>
-      </div>
+      </div >
 
     )
   }

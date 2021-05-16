@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import Navbar from './Navbar';
-import Albums from './Albums'
+import Albums from './Albums';
 
 const imgStyle = {
-  width: '50px',
+  width: '100px',
   borderRadius: '50%'
 }
 
@@ -82,29 +82,35 @@ export default class ArtistDetails extends React.Component {
   }
 
   render() {
+
     console.log('THE _ID', this.state.artistmodelId)
     const artist = this.state.artistObj;
-    if (!artist) return <h1>Loading...</h1>
-    return (
-      <div className='artistResult' >
+    if (!artist) return (
+      <div>
         <Navbar />
-        <div>
-          {artist.images[0] ? <img style={imgStyle} src={artist.images[0].url} alt={artist.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
-          <h1>{artist.name}</h1>
-        </div>
-        <div>
-          <p>{this.state.artistIdFromSpotify}</p>
-          <a href={artist.external_urls.spotify}>Check in Spotify</a>
-          {this.state.userArtistsIds.includes(this.state.artistIdFromSpotify) ?
-            <form onSubmit={this.unfollowButton}>
-              <button type='submit'>Unfollow</button>
-            </form> : <form onSubmit={this.followButton}>
-              <button type='submit'>Follow</button>
-            </form>}
+        <h1>Loading...</h1>
+      </div>
+    )
+    return (
+      <div >
+        <Navbar />
+        <div className='resultscontainer'>
+          <div className='artistcontainer' >
+            <div>
+              {artist.images[0] ? <img style={imgStyle} src={artist.images[0].url} alt={artist.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
+              <h2>{artist.name}</h2>
+            </div>
+            {this.state.userArtistsIds.includes(this.state.artistIdFromSpotify) ?
+              <form onSubmit={this.unfollowButton}>
+                <button className='followButton' type='submit'>Unfollow</button>
+              </form> : <form onSubmit={this.followButton}>
+                <button className='followButton' type='submit'>Follow</button>
+              </form>}
+          </div>
           <div>
-
             <Albums artist={this.state.artistIdFromSpotify} />
           </div>
+
         </div>
       </div>
     )

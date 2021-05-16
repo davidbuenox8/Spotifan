@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { signup } from '../services/auth';
+import { Link } from 'react-router-dom';
 
 export default class Signup extends Component {
 
@@ -51,10 +52,6 @@ export default class Signup extends Component {
               value={this.state.username}
               onChange={this.handleChange}
             />
-
-
-
-
             <label htmlFor="password"><strong>Password:</strong> </label>
             <input
               id="password"
@@ -68,18 +65,20 @@ export default class Signup extends Component {
           <div className='logcontainer'>
             <div className='signup'>
 
-              <a href="/"><strong>Back</strong></a>
+              <div className='signup'>
+                <Link to="/"> <strong>Back</strong> </Link>
+              </div>
             </div>
             <div className='signup'>
 
-              <button type="submit"><strong>Log in</strong></button>
+              <button type="submit"><strong>Sign Up</strong></button>
             </div>
           </div>
           {this.state.message && (
-            <h3>{this.state.message}</h3>
+            <h4 className='message'>{this.state.message}</h4>
           )}
         </form>
-      </div >
+      </div>
     )
   }
 }

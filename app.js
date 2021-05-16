@@ -203,6 +203,9 @@ app.use("/api/auth", auth);
 const artists = require('./routes/artists');
 app.use('/api/artists', artists)
 
+const users = require('./routes/users');
+app.use('/api/users', users)
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

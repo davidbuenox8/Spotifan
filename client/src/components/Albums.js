@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import axios from 'axios';
+import redBookmark from '../img/redBookmark.png';
+import whiteBookmark from '../img/whiteBookmark.png'
 
 
 
@@ -29,21 +30,34 @@ export default class Albums extends React.Component {
     const imgStyle = {
       width: '100px'
     }
+    const logo = {
+      width: '50px',
+    }
+
+    const bookmark = {
+      width: '30px'
+    }
+
+
     const albums = this.state.albums.map(album => {
       return (
-        <Link key={album.id} to={`/album/${album.id}`}>
-          <div className='albumdiv'>
-            {album.images[0] ? <img style={imgStyle} src={album.images[0].url} alt={album.name} /> : <img style={imgStyle} src='https://upload.wikimedia.org/wikipedia/commons/b/b9/No_Cover.jpg' alt="" />}
+
+        <div key={album.id} className='albumResults'>
+          {album.images[0] ? <img style={imgStyle} src={album.images[0].url} alt={album.name} /> : <img style={imgStyle} src='https://peelander-z.com/wp-content/themes/soundcheck/images/default-album-artwork.png' alt="" />}
+          <div className='albumContent'>
             <h4>{album.name}</h4>
-            <p>{album.id}</p>
+            <div className='bookandlogo' >
+              <a href={album.external_urls.spotify}> <img style={logo} src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-green-logo-8.png" alt="" /></a>
+              <button> <img style={bookmark} src={whiteBookmark} alt="bookmark" /></button>
+            </div>
           </div>
-        </Link >
+        </div>
+
       )
     })
 
     return (
       <div>
-        <h2>Albums</h2>
         { albums}
       </div >
     )

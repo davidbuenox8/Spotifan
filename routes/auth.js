@@ -9,7 +9,7 @@ router.post('/signup', (req, res, next) => {
   // is the password at least 8 chars
   if (password.length < 1) {
     // if not we show the signup form again with a message
-    return res.status(400).json({ message: 'Your password has to be 8 chars min' });
+    return res.status(400).json({ message: 'Your password must contain 6 characters min' });
   }
   if (username === '') {
     return res.status(400).json({ message: 'Your username cannot be empty' });

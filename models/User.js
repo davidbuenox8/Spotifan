@@ -6,8 +6,10 @@ const userSchema = new Schema({
     type: String,
     unique: true,
   },
+  chosenName: String,
   password: String,
   avatar: String,
+  publicId: String,
   spotifyId: String,
   followedArtists: [{
     type: Schema.Types.ObjectId,

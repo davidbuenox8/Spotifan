@@ -27,8 +27,8 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Navbar />
-        <h1>Dashboard</h1>
-
+        <h2 className='textbefore'>Your dashboard looks quite empty...
+        Go and follow some artists.</h2>
       </div>
     )
   }

@@ -42,6 +42,7 @@ export default class AlbumDetails extends React.Component {
         <Navbar />
         <h1>album details</h1>
         {tracks}
+
         <p><a href={url}> Check album in Spotify</a></p>
 
       </div>

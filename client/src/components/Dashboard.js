@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
     const albums = this.state.tracks.map(album => {
       return (
         <div key={album.id}>
-          <AlbumResult album={album} />
+          <AlbumResult userSavedAlbums={this.props.user.savedAlbums} album={album} />
         </div>
       )
     })

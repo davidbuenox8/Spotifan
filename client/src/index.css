@@ -255,7 +255,6 @@ margin-left: 30px
 }
 
 .profilecontent{
-background:  rgba(32, 32, 32, 0.876);
 display: flex;
 justify-content: space-evenly;
 margin: 10px;
@@ -290,7 +289,13 @@ border-radius: 7px;
   margin-top: 200px;
 }
 
-p{
+.pIntro{
   margin: 0 30px 
+}
+
+.pAlbum{
+  margin-top:-10px;
+  margin-bottom: 15px;
+  margin-left: 50px;
 }
 

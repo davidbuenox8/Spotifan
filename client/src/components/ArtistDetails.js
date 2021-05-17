@@ -11,6 +11,7 @@ const imgStyle = {
 export default class ArtistDetails extends React.Component {
 
   state = {
+    user: this.props.user,
     artistObj: null,
     name: null,
     avatar: null,
@@ -42,32 +43,31 @@ export default class ArtistDetails extends React.Component {
       artistIdFromSpotify,
     })
       .then(response => {
-        console.log('The model created?', response.data)
+        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+        console.log('The model created?', filter)
         this.setState({
-          userArtistsIds: response.data.followedArtists,
-          artistmodelId: response.data._id
-
+          userArtistsIds: filter
         })
       })
   }
   unfollowButton = (event) => {
     event.preventDefault();
-    console.log('The EVENT', event)
-    axios.put(`/api/artist/${this.state.artistmodelId}`)
+    axios.delete(`/api/artists/${this.state.artistIdFromSpotify}`)
       .then((response) => {
+        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
         console.log('the axios response', response)
         this.setState({
-          userArtistsIds: response.data.followedArtists,
+          userArtistsIds: filter
         })
       })
   }
 
 
   userFollowedArtists = () => {
-    axios.get('/api/auth/user')
+    axios.get('/api/users')
       .then(response => {
+        console.log(response.data)
         const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
-        console.log('THE USER FOLLOWS:', filter);
         this.setState({
           userArtistsIds: filter
         })
@@ -83,13 +83,12 @@ export default class ArtistDetails extends React.Component {
 
   render() {
 
-    console.log('THE _ID', this.state.artistmodelId)
     const artist = this.state.artistObj;
     if (!artist) return (
       <div>
         <Navbar />
         <h1>Loading...</h1>
-      </div>
+      </div >
     )
     return (
       <div >

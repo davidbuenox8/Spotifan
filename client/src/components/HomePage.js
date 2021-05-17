@@ -9,8 +9,8 @@ export default function HomePage() {
         <img src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-green-logo-8.png" alt="Spotify.logo" />
         <h1>Spotifan</h1>
       </div>
-      <p>No more missing out on music!{"\n"}</p>
-      <p>Keep track of all new releases from your favorite artists on Spotify.</p>
+      <p className='pIntro'>No more missing out on music!{"\n"}</p>
+      <p className='pIntro'>Keep track of all new releases from your favorite artists on Spotify.</p>
 
       <div className='logcontainer'>
 

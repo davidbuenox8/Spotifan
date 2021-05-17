@@ -5,13 +5,6 @@ const userSchema = new Schema({
   name: String,
   avatar: String,
   artistIdFromSpotify: String,
-  likedTracks: [{
-    trackId: String
-  }],
-  listenLater: [{
-    trackId: String
-  }],
-  follow: Boolean
 });
 
 const Artist = model("Artist", userSchema);

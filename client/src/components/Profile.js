@@ -10,6 +10,13 @@ const imgStyleProfile = {
   borderRadius: '50%',
   width: '100px'
 }
+
+const imgStyle = {
+  width: '50px',
+  height: '50px',
+  borderRadius: '50%'
+}
+
 export default class Profile extends React.Component {
 
   state = {
@@ -17,7 +24,10 @@ export default class Profile extends React.Component {
     chosenName: '',
     avatar: '',
     editForm: false,
-    followedArtistButton: false
+    followedArtists: [],
+    followedArtistButton: false,
+    listenLater: [],
+    listenLaterButton: false
   }
 
   handleLogout = () => {
@@ -25,6 +35,21 @@ export default class Profile extends React.Component {
       this.props.setUser(null);
     })
   }
+
+  userFollowedArtists = () => {
+    axios.get('/api/users')
+      .then(response => {
+        console.log(response.data)
+        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+        this.setState({
+          followedArtists: response.data.followedArtists
+        })
+      })
+  }
+
+
+
+
   handleChange = e => {
     const { name, value } = e.target
     this.setState({
@@ -51,19 +76,38 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      user: this.props.user,
-    })
+    this.userFollowedArtists();
   }
 
   toggleEditForm = () => {
     this.setState((state) => ({
-      editForm: !state.editForm
+      editForm: !state.editForm,
+      followedArtistButton: false
     }))
   }
 
+  toggleFollowedArtists = () => {
+    console.log(this.state.followedArtistButton)
+    this.setState({
+      editForm: false,
+      followedArtistButton: !this.state.followedArtistButton,
+      listenLaterButton: false
+    })
+  }
+
   render() {
-    const user = this.state.user
+    const user = this.state.user;
+    const followedArtist = this.state.followedArtists.map(result => {
+      return (
+        <Link key={result.artistObj.id} to={`/artist/${result.artistObj.id}`}>
+          <div className='artistResult'>
+            {result.artistObj.images[0] ? <img style={imgStyle} src={result.artistObj.images[0].url} alt={result.artistObj.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
+            <h3>{result.artistObj.name}</h3>
+          </div>
+        </Link>
+      )
+    })
+
     return (
       <>
         <Navbar />
@@ -82,11 +126,14 @@ export default class Profile extends React.Component {
         <div className='profilecontent'>
           <div className='signup'>
 
-            <button><strong>Listen Later</strong></button>
+            <button><strong>Saved Albums</strong></button>
           </div>
           <div className='signup'>
-            <button><strong>Followed Artists</strong> </button>
+            <button onClick={this.toggleFollowedArtists}><strong>Followed Artists</strong> </button>
           </div>
+        </div>
+        <div className='resultscontainer'>
+          {this.state.followedArtistButton === true && followedArtist}
         </div>
 
       </>

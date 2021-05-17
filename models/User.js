@@ -14,7 +14,11 @@ const userSchema = new Schema({
   followedArtists: [{
     type: Schema.Types.ObjectId,
     ref: 'Artist'
-  }]
+  }],
+  savedAlbums: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Album'
+  }],
 });
 
 const User = model("User", userSchema);

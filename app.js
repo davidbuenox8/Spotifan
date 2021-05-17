@@ -138,44 +138,25 @@ app.get('/albums/:artistId', (req, res) => {
 })
 
 
-/* app.get('/followedArtistsTracks', (req, res) => {
-
-  User.findById(req.user._id).populate('followedArtists')
-    .then(arrayArtists => {
-      arrayArtists.followedArtists.forEach(artist => {
-        spotifyApi.getArtistAlbums(artist.artistIdFromSpotify)
-          .then(data => {
-            console.log(data.body.items)
-            res.status(200).json(data.body.items)
-          })
-          .catch(err => console.log(err));
-      })
-    })
-}) */
-
 app.get('/followedArtistsTracks', (req, res) => {
+  const followArtistDataArr = [];
   User.findById(req.user._id).populate('followedArtists')
     .then(arrayArtists => {
-      const followArtistDataArr = [];
+      let i = 0;
       arrayArtists.followedArtists.forEach(artist => {
         spotifyApi.getArtistAlbums(artist.artistIdFromSpotify)
           .then(eachFollowArtistData => {
             followArtistDataArr.push(eachFollowArtistData.body.items)
+            if (i === arrayArtists.followedArtists.length - 1) {
+              res.status(200).json(followArtistDataArr)
+            }
+            i += 1
           })
-          .catch(err => { console.log(err) })
+          .catch(err => console.log(err));
       })
-        .then(() => { console.log('THE FINAL ARRAY', followArtistDataArr) })
     })
-    .catch(err => console.log(err))
 })
 
-
-/* Promise.all(promises).then(finalData => {
-  res.status(200).json(finalData)
-  }) */
-
-
-/*  const mergedData = [].concat.apply([], followArtistDataArr) */
 
 
 app.get('/album/:albumId', (req, res) => {
@@ -187,6 +168,8 @@ app.get('/album/:albumId', (req, res) => {
     .catch(err => console.log(err));
 
 })
+
+
 
 
 // default value for title local

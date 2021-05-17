@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
         {
           "$push": { "followedArtists": artist._id }
         },
-        { new: true }).then(user => {
+        { new: true }).populate('followedArtists').then(user => {
           res.status(200).json(user)
         }).catch(err => {
           console.log('Error while finding a artist by ID during application: ', err);
@@ -28,17 +28,24 @@ router.post('/', (req, res) => {
 })
 
 
-router.put('/:id', (req, res) => {
-  console.log('THE REQ', req)
-  User.findByIdAndUpdate(req.user._id,
-    {
-      "$pull": { "followedArtists": req.params.id }
-    },
-    { new: true }).then(user => {
-      res.status(200).json({ message: 'artist unfollowed' });
-    }).catch(err => {
-      console.log('Error while deleting the artist: ', err);
-    })
+router.delete('/:id', (req, res) => {
+  console.log('THE REQ', req.params)
+  Artist.findOneAndDelete({
+    artistIdFromSpotify
+      : `${req.params.id}`
+  }).then((data) => {
+    User.findByIdAndUpdate(req.user._id,
+      {
+        "$pull": { "followedArtists": data._id }
+      },
+      { new: true }).populate('followedArtists').then(user => {
+        res.status(200).json(user)
+      }).catch(err => {
+        console.log('Error while finding a artist in array: ', err);
+      })
+  })
+    .catch(err => res.json(err))
+
 })
 
 

@@ -43,6 +43,7 @@ export default class ArtistSearch extends React.Component {
       height: '50px',
       borderRadius: '50%'
     }
+
     const imgStyleProfile = {
       borderRadius: '50%',
       width: '35px'

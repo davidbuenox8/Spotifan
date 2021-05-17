@@ -3,6 +3,16 @@ import axios from 'axios';
 import redBookmark from '../img/redBookmark.png';
 import whiteBookmark from '../img/whiteBookmark.png'
 
+const imgStyle = {
+  width: '100px'
+}
+const logo = {
+  width: '50px',
+}
+
+const bookmark = {
+  width: '30px'
+}
 
 
 
@@ -26,19 +36,6 @@ export default class Albums extends React.Component {
   }
 
   render() {
-    console.log(this.state.albums)
-    const imgStyle = {
-      width: '100px'
-    }
-    const logo = {
-      width: '50px',
-    }
-
-    const bookmark = {
-      width: '30px'
-    }
-
-
     const albums = this.state.albums.map(album => {
       return (
 

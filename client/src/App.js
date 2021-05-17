@@ -9,7 +9,7 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import ArtistSearch from './components/ArtistSearch';
 import ArtistDetails from './components/ArtistDetails';
-import AlbumDetails from './components/AlbumDetails'
+
 
 class App extends React.Component {
 
@@ -61,13 +61,6 @@ class App extends React.Component {
             path='/artist/:id'
             user={this.state.user}
             component={ArtistDetails}
-            redirectPath='/login'
-          />
-
-          <ProtectedRoute
-            path='/album/:albumId'
-            user={this.state.user}
-            component={AlbumDetails}
             redirectPath='/login'
           />
 

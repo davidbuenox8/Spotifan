@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ArtistResult from './ArtistResult';
 
 
 export default class ArtistSearch extends React.Component {
@@ -50,15 +50,12 @@ export default class ArtistSearch extends React.Component {
     }
     const artists = this.state.artists.map(result => {
       return (
-        <Link key={result.id} to={`/artist/${result.id}`}>
-          <div className='artistResult'>
-            {result.images[0] ? <img style={imgStyle} src={result.images[0].url} alt={result.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
-            <h3>{result.name}</h3>
-          </div>
-        </Link>
+        <div key={result.id}>
+          <ArtistResult result={result} />
+
+        </div>
       )
     })
-
     return (
       <div>
         <nav>

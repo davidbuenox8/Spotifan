@@ -2,7 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
   albumObj: Object,
-  albumId: String,
+  albumName: String,
+  albumIdFromSpotify: String,
+
 });
 
 const Album = model("Album", userSchema);

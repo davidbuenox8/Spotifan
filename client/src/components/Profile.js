@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { logout } from '../services/auth';
 import EditProfile from './EditProfile';
 import { Image, Transformation, CloudinaryContext } from 'cloudinary-react';
-import axios from 'axios'
+import axios from 'axios';
+import ArtistResult from './ArtistResult';
+import AlbumResult from './AlbumResult';
 
 const imgStyleProfile = {
   borderRadius: '50%',
@@ -26,8 +28,9 @@ export default class Profile extends React.Component {
     editForm: false,
     followedArtists: [],
     followedArtistButton: false,
-    listenLater: [],
-    listenLaterButton: false
+    savedAlbums: [],
+    savedAlbumsButton: false,
+    userSavedAlbums: this.props.user.savedAlbums
   }
 
   handleLogout = () => {
@@ -40,9 +43,10 @@ export default class Profile extends React.Component {
     axios.get('/api/users')
       .then(response => {
         console.log(response.data)
-        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+
         this.setState({
-          followedArtists: response.data.followedArtists
+          followedArtists: response.data.followedArtists,
+          savedAlbums: response.data.savedAlbums
         })
       })
   }
@@ -65,7 +69,6 @@ export default class Profile extends React.Component {
       chosenName,
     })
       .then(response => {
-        console.log('IS IT THIS?', response.data)
         this.setState({
           user: response.data,
           chosenName: response.data.name,
@@ -87,24 +90,36 @@ export default class Profile extends React.Component {
   }
 
   toggleFollowedArtists = () => {
-    console.log(this.state.followedArtistButton)
     this.setState({
       editForm: false,
       followedArtistButton: !this.state.followedArtistButton,
-      listenLaterButton: false
+      savedAlbumsButton: false
+    })
+  }
+
+  toggleSavedAlbums = () => {
+    this.setState({
+      editForm: false,
+      followedArtistButton: false,
+      savedAlbumsButton: !this.state.savedAlbumsButton
     })
   }
 
   render() {
+    console.log(this.state.savedAlbums)
     const user = this.state.user;
     const followedArtist = this.state.followedArtists.map(result => {
       return (
-        <Link key={result.artistObj.id} to={`/artist/${result.artistObj.id}`}>
-          <div className='artistResult'>
-            {result.artistObj.images[0] ? <img style={imgStyle} src={result.artistObj.images[0].url} alt={result.artistObj.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
-            <h3>{result.artistObj.name}</h3>
-          </div>
-        </Link>
+        <div key={result.artistObj.id}>
+          <ArtistResult result={result.artistObj} />
+        </div>
+      )
+    })
+    const savedAlbums = this.state.savedAlbums.map(result => {
+      return (
+        <div key={result.albumObj.id}>
+          <AlbumResult bookmark='true' userSavedAlbums={this.state.userSavedAlbums} album={result.albumObj} />
+        </div>
       )
     })
 
@@ -126,7 +141,7 @@ export default class Profile extends React.Component {
         <div className='profilecontent'>
           <div className='signup'>
 
-            <button><strong>Saved Albums</strong></button>
+            <button onClick={this.toggleSavedAlbums}><strong>Saved Albums</strong></button>
           </div>
           <div className='signup'>
             <button onClick={this.toggleFollowedArtists}><strong>Followed Artists</strong> </button>
@@ -134,6 +149,7 @@ export default class Profile extends React.Component {
         </div>
         <div className='resultscontainer'>
           {this.state.followedArtistButton === true && followedArtist}
+          {this.state.savedAlbumsButton === true && savedAlbums}
         </div>
 
       </>

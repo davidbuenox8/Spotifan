@@ -17,6 +17,7 @@ export default class ArtistDetails extends React.Component {
     avatar: null,
     artistIdFromSpotify: null,
     userArtistsIds: null,
+    userSavedAlbums: null,
 
   }
 
@@ -67,9 +68,11 @@ export default class ArtistDetails extends React.Component {
     axios.get('/api/users')
       .then(response => {
         console.log(response.data)
-        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+        const filterArtist = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+        const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
         this.setState({
-          userArtistsIds: filter
+          userArtistsIds: filterArtist,
+          userSavedAlbums: filterAlbum,
         })
       })
   }
@@ -88,8 +91,9 @@ export default class ArtistDetails extends React.Component {
       <div>
         <Navbar />
         <h1>Loading...</h1>
-      </div >
+      </div>
     )
+    console.log(this.state.userSavedAlbums)
     return (
       <div >
         <Navbar />
@@ -107,7 +111,7 @@ export default class ArtistDetails extends React.Component {
               </form>}
           </div>
           <div>
-            <Albums artist={this.state.artistIdFromSpotify} />
+            <Albums userSavedAlbums={this.state.userSavedAlbums} artist={this.state.artistIdFromSpotify} />
           </div>
 
         </div>

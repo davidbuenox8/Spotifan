@@ -3,10 +3,10 @@ import Navbar from './Navbar'
 import { Link } from 'react-router-dom';
 import { logout } from '../services/auth';
 import EditProfile from './EditProfile';
-import { Image, Transformation, CloudinaryContext } from 'cloudinary-react';
 import axios from 'axios';
 import ArtistResult from './ArtistResult';
 import AlbumDetails from './AlbumDetails';
+import service from '../api/service';
 
 const imgStyleProfile = {
   borderRadius: '50%',
@@ -65,17 +65,39 @@ export default class Profile extends React.Component {
     })
   }
 
+  handleFileUpload = (e) => {
+    console.log('The file to be uploaded is: ', e.target.files[0]);
+    const uploadData = new FormData();
+
+    uploadData.append('avatar', e.target.files[0]);
+
+    service
+      .handleUpload(uploadData)
+      .then(response => {
+        console.log('response is: ', response);
+        this.setState({
+          avatar: response.secure_url
+        });
+      })
+      .catch(err => {
+        console.log('Error while uploading the file: ', err);
+      });
+  }
+
   handleSubmit = e => {
-    const { chosenName } = this.state;
+    console.log(e)
+    const { chosenName, avatar } = this.state;
 
     e.preventDefault();
     axios.put(`/api/users/${this.state.user._id}`, {
-      chosenName,
+      chosenName, avatar
     })
       .then(response => {
+        console.log('second resopnse', response.data)
         this.setState({
           user: response.data,
           chosenName: response.data.name,
+          avatar: response.data.avatar,
           editForm: false
         })
       })
@@ -128,7 +150,7 @@ export default class Profile extends React.Component {
       <>
         <Navbar />
         <div className='profilecontainer'>
-          {user.avatar ? <img src={user.avatar} alt="avatar" /> : <img style={imgStyleProfile} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
+          {user.avatar ? <img style={imgStyleProfile} src={user.avatar} alt="avatar" /> : <img style={imgStyleProfile} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
           {user.chosenName ? <h1>{user.chosenName}</h1> : <h1>{user.username}</h1>}
           <button id='edit' className='followButton' onClick={this.toggleEditForm}>Edit</button>
           <Link to='/' onClick={this.handleLogout}> <button className='followButton'>Log Out</button> </Link>
@@ -136,6 +158,7 @@ export default class Profile extends React.Component {
         {this.state.editForm && (
           <EditProfile
             {...this.state}
+            handleFileUpload={this.handleFileUpload}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />)}

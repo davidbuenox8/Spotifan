@@ -85,12 +85,14 @@ export default class ArtistDetails extends React.Component {
   render() {
 
     const artist = this.state.artistObj;
-    if (!artist) return (
+    const artistsIds = this.state.userArtistsIds;
+    if (!artist || !artistsIds) return (
       <div>
         <Navbar />
         <h1>Loading...</h1>
       </div>
     )
+
     return (
       <div >
         <Navbar />

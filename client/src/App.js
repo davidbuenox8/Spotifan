@@ -9,7 +9,6 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import ArtistSearch from './components/ArtistSearch';
 import ArtistDetails from './components/ArtistDetails';
-import axios from 'axios';
 
 
 class App extends React.Component {

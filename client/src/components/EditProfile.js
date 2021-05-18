@@ -14,10 +14,9 @@ export default class EditProfile extends Component {
             onChange={this.props.handleChange}
           />
           <label htmlFor="avatar"> <h3>Avatar:</h3> </label>
-          <input type="file" ref="avatar"
+          <input type="file"
             name='avatar' id='avatar'
-            value={this.props.avatar}
-            onChange={this.props.handleChange} />
+            onChange={e => this.props.handleFileUpload(e)} />
           <div className='signup'>
             <button type="submit"><strong> Edit Profile</strong></button>
           </div>

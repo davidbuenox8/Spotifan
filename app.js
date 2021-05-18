@@ -33,7 +33,7 @@ app.use(
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const mongoose = require('./db/index');
-const DB_URL = 'mongodb://localhost/spotifan';
+const DB_URL = process.env.MONGODB_URI;
 
 
 app.use(

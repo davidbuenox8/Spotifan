@@ -122,7 +122,6 @@ spotifyApi
   .catch(error => console.log('Something went wrong when retrieving an access token', error));
 
 app.get('/artist-search/:name', (req, res) => {
-
   spotifyApi
     .searchArtists(req.params.name)
     .then(data => {
@@ -170,7 +169,6 @@ app.get('/followedArtistsTracks', (req, res) => {
 
 
 app.get('/album/:albumId', (req, res) => {
-
   spotifyApi.getAlbumTracks(req.params.albumId)
     .then(data => {
       res.status(200).json(data.body.items)

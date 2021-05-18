@@ -29,8 +29,6 @@ export default class Signup extends Component {
             password: ''
           })
         } else {
-          console.log(response);
-          // we now put the user in the state of App.js
           this.props.setUser(response);
           this.props.history.push('/dashboard')
         }

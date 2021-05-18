@@ -26,11 +26,11 @@ router.post('/signup', (req, res, next) => {
         // we create the hashed password
         const salt = bcrypt.genSaltSync();
         const hash = bcrypt.hashSync(password, salt);
-        console.log(hash);
+
         // create the user in the database
         User.create({ username: username, password: hash })
           .then(createdUser => {
-            console.log(createdUser);
+
             req.login(createdUser, err => {
               if (err) {
                 return res.status(500).json({ message: 'Error while attempting to login' })
@@ -69,7 +69,6 @@ router.post('/login', (req, res, next) => {
 
 // this checks if we have a logged in user -> returns this user as json or null
 router.get('/loggedin', (req, res) => {
-  console.log('this is the user from the session: ', req.user);
   res.json(req.user);
 })
 
@@ -79,7 +78,6 @@ router.delete('/logout', (req, res) => {
 })
 
 router.get('/user', (req, res) => {
-  console.log('this is the user from the session: ', req.user);
   User.findById(req.user._id).populate('followedArtists')
     .then(user => {
       user.followedArtists.filter(artist => { artist.artistId });

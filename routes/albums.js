@@ -4,14 +4,12 @@ const User = require('../models/User')
 
 router.post('/', (req, res) => {
   const { albumObj, albumName, albumIdFromSpotify } = req.body;
-  console.log('body', req.body)
   Album.create({
     albumObj,
     albumName,
     albumIdFromSpotify,
   })
     .then(album => {
-      console.log(req.user)
       User.findByIdAndUpdate(req.user._id,
         {
           "$push": { "savedAlbums": album._id }
@@ -46,6 +44,5 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.json(err))
 
 })
-
 
 module.exports = router;

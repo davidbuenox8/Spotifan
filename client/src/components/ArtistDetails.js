@@ -44,8 +44,7 @@ export default class ArtistDetails extends React.Component {
       artistIdFromSpotify,
     })
       .then(response => {
-        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
-        console.log('The model created?', filter)
+        const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify);
         this.setState({
           userArtistsIds: filter
         })
@@ -67,7 +66,6 @@ export default class ArtistDetails extends React.Component {
   userFollowedArtists = () => {
     axios.get('/api/users')
       .then(response => {
-        console.log(response.data)
         const filterArtist = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
         const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
         this.setState({

@@ -15,11 +15,9 @@ export default class Dashboard extends Component {
   getData = () => {
     axios.get('/followedArtistsTracks')
       .then(response => {
-        console.log(response.data)
         const mergedData = [].concat.apply([], response.data)
         const sortedData = mergedData.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
         const filteredData = sortedData.slice(0, 100)
-        console.log(filteredData)
         this.setState({
           tracks: filteredData
         })
@@ -30,7 +28,6 @@ export default class Dashboard extends Component {
   userFollowedArtists = () => {
     axios.get('/api/users')
       .then(response => {
-        console.log(response.data)
         const filterArtist = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
         const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
         this.setState({

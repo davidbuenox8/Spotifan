@@ -16,16 +16,15 @@ const bookmark = {
 }
 
 
-export default class AlbumResult extends React.Component {
+export default class AlbumDetails extends React.Component {
 
   state = {
-    user: this.props.user,
     albumObj: this.props.album,
     albumName: this.props.album.artists[0].name,
     albumIdFromSpotify: this.props.album.id,
     userSavedAlbums: this.props.userSavedAlbums,
-
   }
+
 
   bookmarkButton = (event) => {
     event.preventDefault();
@@ -37,9 +36,8 @@ export default class AlbumResult extends React.Component {
     })
       .then(response => {
         const filter = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
-        console.log('The model created?', filter)
         this.setState({
-          userSavedAlbums: filter
+          userSavedAlbums: filter,
         })
       })
   }
@@ -49,10 +47,10 @@ export default class AlbumResult extends React.Component {
     axios.delete(`/api/albums/${this.state.albumIdFromSpotify}`)
       .then((response) => {
         const filter = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
-        console.log('the axios response', response)
         this.setState({
-          userSavedAlbums: filter
+          userSavedAlbums: filter,
         })
+        this.props.userFollowedArtists()
       })
   }
 

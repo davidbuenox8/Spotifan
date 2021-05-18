@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Navbar from './Navbar';
-import AlbumResult from './AlbumResult';
+import AlbumDetails from './AlbumDetails';
 
 
 export default class Dashboard extends Component {
 
   state = {
-    tracks: []
+    tracks: [],
+    userSavedAlbums: this.props.user.savedAlbums,
+    savedAlbums: null
   }
 
   getData = () => {
@@ -16,16 +18,31 @@ export default class Dashboard extends Component {
         console.log(response.data)
         const mergedData = [].concat.apply([], response.data)
         const sortedData = mergedData.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-        console.log(sortedData)
+        const filteredData = sortedData.slice(0, 100)
+        console.log(filteredData)
         this.setState({
-          tracks: sortedData
+          tracks: filteredData
         })
       })
       .catch(err => console.log(err))
   }
 
+  userFollowedArtists = () => {
+    axios.get('/api/users')
+      .then(response => {
+        console.log(response.data)
+        const filterArtist = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
+        const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
+        this.setState({
+          followedArtists: filterArtist,
+          userSavedAlbums: filterAlbum
+        })
+      })
+  }
+
   componentDidMount() {
     this.getData();
+    this.userFollowedArtists();
   }
 
 
@@ -33,7 +50,7 @@ export default class Dashboard extends Component {
     const albums = this.state.tracks.map(album => {
       return (
         <div key={album.id}>
-          <AlbumResult userSavedAlbums={this.props.user.savedAlbums} album={album} />
+          <AlbumDetails userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />
         </div>
       )
     })

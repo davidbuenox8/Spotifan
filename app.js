@@ -18,6 +18,16 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
+//cors
+const cors = require('cors');
+app.use(
+  cors({
+    origin: ['http://localhost:3000']
+  })
+);
+
+
+
 // session configuration
 
 const session = require('express-session');
@@ -190,7 +200,9 @@ const users = require('./routes/users');
 app.use('/api/users', users);
 
 const albums = require('./routes/albums');
-app.use('/api/albums', albums)
+app.use('/api/albums', albums);
+
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

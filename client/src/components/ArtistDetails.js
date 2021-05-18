@@ -93,7 +93,6 @@ export default class ArtistDetails extends React.Component {
         <h1>Loading...</h1>
       </div>
     )
-    console.log(this.state.userSavedAlbums)
     return (
       <div >
         <Navbar />
@@ -111,7 +110,7 @@ export default class ArtistDetails extends React.Component {
               </form>}
           </div>
           <div>
-            <Albums userSavedAlbums={this.state.userSavedAlbums} artist={this.state.artistIdFromSpotify} />
+            <Albums userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} artist={this.state.artistIdFromSpotify} />
           </div>
 
         </div>

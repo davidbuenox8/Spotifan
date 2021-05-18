@@ -18,10 +18,10 @@ router.get('/', (req, res) => {
 
 
 
-router.put('/:id', uploader.single('avatar'), (req, res) => {
+router.post('/:id', uploader.single('avatar'), (req, res) => {
   const { chosenName } = req.body;
   console.log('the body', req.body)
-  console.log('the rest', req.file)
+  console.log('the rest', req.ref)
   /*  const avatar = req.file.path;
    const publicId = req.file.filename;
    User.findByIdAndUpdate(

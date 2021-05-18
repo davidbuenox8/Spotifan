@@ -6,7 +6,7 @@ import EditProfile from './EditProfile';
 import { Image, Transformation, CloudinaryContext } from 'cloudinary-react';
 import axios from 'axios';
 import ArtistResult from './ArtistResult';
-import AlbumResult from './AlbumResult';
+import AlbumDetails from './AlbumDetails';
 
 const imgStyleProfile = {
   borderRadius: '50%',
@@ -30,7 +30,7 @@ export default class Profile extends React.Component {
     followedArtistButton: false,
     savedAlbums: [],
     savedAlbumsButton: false,
-    userSavedAlbums: this.props.user.savedAlbums
+    userSavedAlbums: this.props.user.savedAlbums.map(album => album.albumIdFromSpotify)
   }
 
   handleLogout = () => {
@@ -42,15 +42,19 @@ export default class Profile extends React.Component {
   userFollowedArtists = () => {
     axios.get('/api/users')
       .then(response => {
-        console.log(response.data)
-
+        const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
         this.setState({
           followedArtists: response.data.followedArtists,
-          savedAlbums: response.data.savedAlbums
+          savedAlbums: response.data.savedAlbums,
+          userSavedAlbums: filterAlbum
         })
       })
   }
 
+
+  componentDidMount() {
+    this.userFollowedArtists();
+  }
 
 
 
@@ -78,9 +82,7 @@ export default class Profile extends React.Component {
       .catch(err => console.log(err));
   }
 
-  componentDidMount() {
-    this.userFollowedArtists();
-  }
+
 
   toggleEditForm = () => {
     this.setState((state) => ({
@@ -106,7 +108,6 @@ export default class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.state.savedAlbums)
     const user = this.state.user;
     const followedArtist = this.state.followedArtists.map(result => {
       return (
@@ -118,7 +119,7 @@ export default class Profile extends React.Component {
     const savedAlbums = this.state.savedAlbums.map(result => {
       return (
         <div key={result.albumObj.id}>
-          <AlbumResult bookmark='true' userSavedAlbums={this.state.userSavedAlbums} album={result.albumObj} />
+          <AlbumDetails bookmark='true' userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={result.albumObj} />
         </div>
       )
     })

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import AlbumResult from './AlbumResult';
+import AlbumDetails from './AlbumDetails';
 
 
 
@@ -8,7 +8,7 @@ export default class Albums extends React.Component {
 
   state = {
     albums: [],
-    userSavedAlbums: this.props.userSavedAlbums
+    userSavedAlbums: this.props.userSavedAlbums,
   }
 
   getAlbums = () => {
@@ -28,7 +28,7 @@ export default class Albums extends React.Component {
     const albums = this.state.albums.map(album => {
       return (
         <div key={album.id} >
-          <AlbumResult userSavedAlbums={this.state.userSavedAlbums} album={album} />
+          <AlbumDetails userFollowedArtists={this.props.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />
         </div>
       )
     })

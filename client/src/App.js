@@ -9,12 +9,13 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import ArtistSearch from './components/ArtistSearch';
 import ArtistDetails from './components/ArtistDetails';
+import axios from 'axios';
 
 
 class App extends React.Component {
 
   state = {
-    user: this.props.user
+    user: this.props.user,
   }
 
   setUser = user => {
@@ -24,6 +25,7 @@ class App extends React.Component {
 
 
   render() {
+
     return (
       <div className="App">
         <Switch>

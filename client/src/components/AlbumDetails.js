@@ -39,6 +39,7 @@ export default class AlbumDetails extends React.Component {
         this.setState({
           userSavedAlbums: filter,
         })
+        this.props.userFollowedArtists()
       })
   }
 

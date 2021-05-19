@@ -22,10 +22,13 @@ export default class Albums extends React.Component {
 
   componentDidMount() {
     this.getAlbums();
+
   }
 
   render() {
     const albums = this.state.albums.map(album => {
+      /* if (this.state.userSavedAlbums.length === 0) return <h1>Loading...</h1> */
+      console.log('the user saved albums again', this.state.userSavedAlbums)
       return (
         <div key={album.id} >
           <AlbumDetails userFollowedArtists={this.props.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />

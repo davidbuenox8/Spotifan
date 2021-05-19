@@ -8,8 +8,8 @@ export default class Dashboard extends Component {
 
   state = {
     sortedAlbums: [],
-    userSavedAlbums: this.props.user.savedAlbums,
-    savedAlbums: null
+    userSavedAlbums: [],
+    savedAlbums: []
   }
 
   getData = () => {
@@ -31,6 +31,7 @@ export default class Dashboard extends Component {
         const filterArtist = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
         const filterAlbum = response.data.savedAlbums.map(album => album.albumIdFromSpotify)
         this.setState({
+          savedAlbums: response.data.savedAlbums,
           followedArtists: filterArtist,
           userSavedAlbums: filterAlbum
         })
@@ -44,7 +45,8 @@ export default class Dashboard extends Component {
 
 
   render() {
-    const albums = this.state.sortedAlbums.map(album => {
+    const albums = this.state.sortedAlbums.map((album, index) => {
+      if (this.state.userSavedAlbums.length === 0) return <h1 key={index} >Loading...</h1>
       return (
         <div key={album.id}>
           <AlbumDetails userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />

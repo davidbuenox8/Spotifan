@@ -17,7 +17,7 @@ export default class ArtistDetails extends React.Component {
     avatar: null,
     artistIdFromSpotify: null,
     userArtistsIds: [],
-    userSavedAlbums: [],
+    userSavedAlbums: null,
   }
 
 
@@ -86,13 +86,14 @@ export default class ArtistDetails extends React.Component {
 
     const artist = this.state.artistObj;
     const artistsIds = this.state.userArtistsIds;
-    if (!artist || !artistsIds) return (
+    const userSavedAlbums = this.state.userSavedAlbums;
+    if (!artist || !artistsIds || !userSavedAlbums) return (
       <div>
         <Navbar />
         <h1>Loading...</h1>
       </div>
     )
-
+    console.log('user saved albums in artistdetails', this.state.userSavedAlbums)
     return (
       <div >
         <Navbar />

@@ -18,8 +18,9 @@ export default class ArtistDetails extends React.Component {
     artistIdFromSpotify: null,
     userArtistsIds: null,
     userSavedAlbums: null,
-
   }
+
+
 
   getArtist = () => {
     axios.get(`/artist/${this.props.match.params.id}`)
@@ -76,7 +77,6 @@ export default class ArtistDetails extends React.Component {
   }
 
 
-
   componentDidMount() {
     this.userFollowedArtists()
     this.getArtist();
@@ -102,7 +102,7 @@ export default class ArtistDetails extends React.Component {
               {artist.images[0] ? <img style={imgStyle} src={artist.images[0].url} alt={artist.name} /> : <img style={imgStyle} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
               <h2>{artist.name}</h2>
             </div>
-            {this.state.userArtistsIds.includes(this.state.artistIdFromSpotify) ?
+            {artistsIds.includes(this.state.artistIdFromSpotify) ?
               <form onSubmit={this.unfollowButton}>
                 <button className='followButton' type='submit'>Unfollow</button>
               </form> : <form onSubmit={this.followButton}>

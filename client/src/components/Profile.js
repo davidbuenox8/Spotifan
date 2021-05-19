@@ -140,7 +140,7 @@ export default class Profile extends React.Component {
 
     return (
       <>
-        <Navbar avatar={this.state.avatar} />
+        <Navbar />
         <div className='profilecontainer'>
           {user.avatar ? <img src={user.avatar} alt="avatar" /> : <img src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
           {user.chosenName ? <h1>{user.chosenName}</h1> : <h1>{user.username}</h1>}

@@ -53,16 +53,7 @@ export default class ArtistSearch extends React.Component {
     const mgnGlass = {
       width: '15px'
     }
-    const imgStyle = {
-      width: '50px',
-      height: '50px',
-      borderRadius: '50%'
-    }
 
-    const imgStyleProfile = {
-      borderRadius: '50%',
-      width: '35px'
-    }
     const artists = this.state.artists.map(result => {
       return (
         <div key={result.id}>

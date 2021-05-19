@@ -8,6 +8,21 @@ export default class ArtistSearch extends React.Component {
   state = {
     artists: [],
     query: '',
+    avatar: ''
+  }
+
+
+  getUser() {
+    axios.get('/api/users')
+      .then(response => {
+        this.setState({
+          avatar: response.data.avatar
+        })
+      })
+  }
+
+  componentDidMount() {
+    this.getUser()
   }
 
   searchArtist = (event) => {
@@ -59,8 +74,7 @@ export default class ArtistSearch extends React.Component {
     return (
       <div>
         <nav>
-          <h3><a href="/profile"><img style={imgStyleProfile} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" /> </a></h3>
-
+          <h3>{this.state.avatar ? <a href="/profile"><img className='profileImgNav' src={this.state.avatar} alt="avatar" /></a> : <a href="/profile"><img className='profileImgNav' src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" /></a>}</h3>
           <h3><form onSubmit={this.searchArtist}>
             <div className='searchbar'>
               <input className="search" type="text" name='query'

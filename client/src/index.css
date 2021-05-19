@@ -250,6 +250,16 @@ margin-left: 30px
   margin-top: 30px;
 }
 
+.profilecontainer img{
+    border-radius: 50%;
+    width: 100px
+}
+
+.profileImgNav{
+  border-radius: 50%;
+  width: 35px
+}
+
 #edit{
   width: 73.44px
 }

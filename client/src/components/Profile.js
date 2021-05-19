@@ -8,16 +8,8 @@ import ArtistResult from './ArtistResult';
 import AlbumDetails from './AlbumDetails';
 import service from '../api/service';
 
-const imgStyleProfile = {
-  borderRadius: '50%',
-  width: '100px'
-}
 
-const imgStyle = {
-  width: '50px',
-  height: '50px',
-  borderRadius: '50%'
-}
+
 
 export default class Profile extends React.Component {
 
@@ -148,9 +140,9 @@ export default class Profile extends React.Component {
 
     return (
       <>
-        <Navbar />
+        <Navbar avatar={this.state.avatar} />
         <div className='profilecontainer'>
-          {user.avatar ? <img style={imgStyleProfile} src={user.avatar} alt="avatar" /> : <img style={imgStyleProfile} src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
+          {user.avatar ? <img src={user.avatar} alt="avatar" /> : <img src='https://freesvg.org/img/abstract-user-flat-3.png' alt="" />}
           {user.chosenName ? <h1>{user.chosenName}</h1> : <h1>{user.username}</h1>}
           <button id='edit' className='followButton' onClick={this.toggleEditForm}>Edit</button>
           <Link to='/' onClick={this.handleLogout}> <button className='followButton'>Log Out</button> </Link>

@@ -118,7 +118,10 @@ nav{
   display: flex;
   justify-content: space-around;
   background-color: #1DB954;
-  border:none
+  border:none;
+  position: fixed;
+  top:0;
+  width:100%
 }
 
 nav div{
@@ -154,7 +157,7 @@ nav button{
 }
 
 .resultscontainer{
-  margin-top: 20px;
+  margin-top: 120px;
 }
 
 .resultscontainer a{
@@ -162,6 +165,13 @@ nav button{
   color: white
 }
 
+.profileresultcontainer{
+  margin-top: 20px;
+}
+.profileresultcontainer a{
+  text-decoration: none;
+  color: white
+}
 .artistResult{
   display:flex;
   justify-content: flex-start;
@@ -184,6 +194,7 @@ margin-left: 30px
   align-items: baseline;
   margin-left: 20px;
 }
+
 
 
 
@@ -247,17 +258,23 @@ margin-left: 30px
 }
 
 .profilecontainer{
-  margin-top: 30px;
+  margin-top: 120px;
+}
+
+.dashcontainer{
+  margin-top: 90px
 }
 
 .profilecontainer img{
     border-radius: 50%;
-    width: 100px
+    width: 100px;
+    height: 100px;
 }
 
 .profileImgNav{
   border-radius: 50%;
-  width: 35px
+  width: 35px;
+  height:35px;
 }
 
 #edit{

@@ -160,7 +160,7 @@ export default class Profile extends React.Component {
             <button onClick={this.toggleFollowedArtists}><strong>Followed Artists</strong> </button>
           </div>
         </div>
-        <div className='resultscontainer'>
+        <div className='profileresultcontainer'>
           {this.state.followedArtistButton === true && followedArtist}
           {this.state.savedAlbumsButton === true && savedAlbums}
         </div>

@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
       )
     })
     return (
-      <div>
+      <div className='dashcontainer'>
         <Navbar />
         {this.state.sortedAlbums.length === 0 ? <h2 className='textbefore'>Your dashboard looks quite empty...
         Go and follow some artists.</h2> : albums}

@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
 
   state = {
     sortedAlbums: [],
-    userSavedAlbums: [],
+    userSavedAlbums: null,
     savedAlbums: []
   }
 
@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
 
   render() {
     const albums = this.state.sortedAlbums.map((album, index) => {
-      /* if (this.state.userSavedAlbums.length === 0) return <h1 key={index} >Loading...</h1> */
+      if (!this.state.userSavedAlbums) return <h1 key={index} >Loading...</h1>
       return (
         <div key={album.id}>
           <AlbumDetails userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />

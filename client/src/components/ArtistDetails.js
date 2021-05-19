@@ -16,8 +16,8 @@ export default class ArtistDetails extends React.Component {
     name: null,
     avatar: null,
     artistIdFromSpotify: null,
-    userArtistsIds: null,
-    userSavedAlbums: null,
+    userArtistsIds: [],
+    userSavedAlbums: [],
   }
 
 

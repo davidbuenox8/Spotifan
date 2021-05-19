@@ -7,7 +7,7 @@ import AlbumDetails from './AlbumDetails';
 export default class Dashboard extends Component {
 
   state = {
-    tracks: [],
+    sortedAlbums: [],
     userSavedAlbums: this.props.user.savedAlbums,
     savedAlbums: null
   }
@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
         const sortedData = mergedData.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
         const filteredData = sortedData.slice(0, 100)
         this.setState({
-          tracks: filteredData
+          sortedAlbums: filteredData
         })
       })
       .catch(err => console.log(err))
@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
 
 
   render() {
-    const albums = this.state.tracks.map(album => {
+    const albums = this.state.sortedAlbums.map(album => {
       return (
         <div key={album.id}>
           <AlbumDetails userFollowedArtists={this.userFollowedArtists} userSavedAlbums={this.state.userSavedAlbums} album={album} />
@@ -54,7 +54,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Navbar />
-        {this.state.tracks.length === 0 ? <h2 className='textbefore'>Your dashboard looks quite empty...
+        {this.state.sortedAlbums.length === 0 ? <h2 className='textbefore'>Your dashboard looks quite empty...
         Go and follow some artists.</h2> : albums}
       </div>
     )

@@ -18,14 +18,6 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require("./config")(app);
 
-//cors
-const cors = require('cors');
-app.use(
-  cors({
-    origin: ['http://localhost:3000']
-  })
-);
-
 
 
 // session configuration

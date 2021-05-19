@@ -10,7 +10,6 @@ export default class EditProfile extends Component {
             type="text"
             id="chosenName"
             name="chosenName"
-            value={this.props.chosenName}
             onChange={this.props.handleChange}
           />
           <label htmlFor="avatar"> <h3>Avatar:</h3> </label>

@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  baseURL: process.env.MONGODB_URI || 'http://localhost:5005'
+  baseURL: process.env.MONGODB_URI /* || 'http://localhost:5005' */
   // withCredentials: true // => you might need this when having the users in the app
 });
 

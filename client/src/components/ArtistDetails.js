@@ -93,7 +93,6 @@ export default class ArtistDetails extends React.Component {
         <h1>Loading...</h1>
       </div>
     )
-    console.log('user saved albums in artistdetails', this.state.userSavedAlbums)
     return (
       <div >
         <Navbar />

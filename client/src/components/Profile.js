@@ -58,7 +58,6 @@ export default class Profile extends React.Component {
   }
 
   handleFileUpload = (e) => {
-    console.log('The file to be uploaded is: ', e.target.files[0]);
     const uploadData = new FormData();
 
     uploadData.append('avatar', e.target.files[0]);
@@ -66,7 +65,6 @@ export default class Profile extends React.Component {
     service
       .handleUpload(uploadData)
       .then(response => {
-        console.log('response is: ', response);
         this.setState({
           avatar: response.secure_url
         });
@@ -85,7 +83,6 @@ export default class Profile extends React.Component {
       chosenName, avatar
     })
       .then(response => {
-        console.log('second resopnse', response.data)
         this.setState({
           user: response.data,
           chosenName: response.data.name,

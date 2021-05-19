@@ -56,7 +56,6 @@ export default class ArtistDetails extends React.Component {
     axios.delete(`/api/artists/${this.state.artistIdFromSpotify}`)
       .then((response) => {
         const filter = response.data.followedArtists.map(artist => artist.artistIdFromSpotify)
-        console.log('the axios response', response)
         this.setState({
           userArtistsIds: filter
         })

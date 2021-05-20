@@ -55,8 +55,6 @@ export default class AlbumDetails extends React.Component {
       })
   }
 
-
-
   render() {
     return (
       <div key={this.props.album.id} className='albumResults'>
@@ -66,7 +64,6 @@ export default class AlbumDetails extends React.Component {
           <p className='pAlbum'>By: {this.props.album.artists[0].name}</p>
           <div className='bookandlogo' >
             <a href={this.props.album.external_urls.spotify}> <img style={logo} src="https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-green-logo-8.png" alt="" /></a>
-
             {(this.state.userSavedAlbums.includes(this.state.albumIdFromSpotify) || this.props.bookmark === 'true') ?
               <button onClick={this.unbookmarkButton}> <img style={bookmark} src={redBookmark} alt="bookmark" /></button> :
               <button onClick={this.bookmarkButton}> <img style={bookmark} src={whiteBookmark} alt="bookmark" /></button>}

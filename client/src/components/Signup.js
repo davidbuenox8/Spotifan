@@ -41,7 +41,6 @@ export default class Signup extends Component {
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <div className='userpasscontainer'>
-
             <label htmlFor="username"> <strong> Username:</strong> </label>
             <input
               id="username"
@@ -62,13 +61,11 @@ export default class Signup extends Component {
           </div>
           <div className='logcontainer'>
             <div className='signup'>
-
               <div className='signup'>
                 <Link to="/"> <strong>Back</strong> </Link>
               </div>
             </div>
             <div className='signup'>
-
               <button type="submit"><strong>Sign Up</strong></button>
             </div>
           </div>

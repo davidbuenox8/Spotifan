@@ -19,7 +19,6 @@ router.post('/', (req, res) => {
         }).catch(err => {
           console.log('Error while finding album by ID during application: ', err);
         })
-
     })
     .catch(err => res.json(err))
 })
@@ -42,7 +41,6 @@ router.delete('/:id', (req, res) => {
       })
   })
     .catch(err => res.json(err))
-
 })
 
 module.exports = router;

@@ -6,11 +6,9 @@ const User = require('../models/User');
 
 
 router.get('/', (req, res) => {
-
   User.findById(req.user._id).populate('followedArtists').populate('savedAlbums')
     .then(user => {
       res.status(200).json(user)
-
     })
 })
 

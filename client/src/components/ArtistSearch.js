@@ -8,7 +8,7 @@ export default class ArtistSearch extends React.Component {
   state = {
     artists: [],
     query: '',
-    avatar: ''
+    avatar: '',
   }
 
 
@@ -73,7 +73,6 @@ export default class ArtistSearch extends React.Component {
               <button type='submit' className='searchButton'> <img style={mgnGlass} src="https://www.freeiconspng.com/thumbs/magnifying-glass-icon/magnifying-glass-icon-13.png" alt="glass" /> </button>
             </div>
           </form></h3>
-
           <h3> <a href="/dashboard"> <img style={imgStyleNav} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Home_Icon.svg/1200px-Home_Icon.svg.png" alt="Home" />  </a> </h3>
         </nav>
         <div className='resultscontainer'>

@@ -59,9 +59,7 @@ export default class Profile extends React.Component {
 
   handleFileUpload = (e) => {
     const uploadData = new FormData();
-
     uploadData.append('avatar', e.target.files[0]);
-
     service
       .handleUpload(uploadData)
       .then(response => {
@@ -153,7 +151,6 @@ export default class Profile extends React.Component {
           />)}
         <div className='profilecontent'>
           <div className='signup'>
-
             <button onClick={this.toggleSavedAlbums}><strong>Saved Albums</strong></button>
           </div>
           <div className='signup'>
@@ -164,7 +161,6 @@ export default class Profile extends React.Component {
           {this.state.followedArtistButton === true && followedArtist}
           {this.state.savedAlbumsButton === true && savedAlbums}
         </div>
-
       </>
     )
   }

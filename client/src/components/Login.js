@@ -29,7 +29,6 @@ export default class Login extends Component {
             password: ''
           })
         } else {
-          // we now put the user in the state of App.js
           this.props.setUser(response);
           this.props.history.push('/dashboard');
         }
@@ -43,7 +42,6 @@ export default class Login extends Component {
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
           <div className='userpasscontainer'>
-
             <label htmlFor="username"> <strong> Username:</strong> </label>
             <input
               id="username"
@@ -52,10 +50,6 @@ export default class Login extends Component {
               value={this.state.username}
               onChange={this.handleChange}
             />
-
-
-
-
             <label htmlFor="password"><strong>Password:</strong> </label>
             <input
               id="password"
@@ -64,7 +58,6 @@ export default class Login extends Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-
           </div>
           <div className='logcontainer'>
             <div className='signup'>

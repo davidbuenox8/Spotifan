@@ -11,16 +11,13 @@ export default function HomePage() {
       </div>
       <p className='pIntro'>No more missing out on music!{"\n"}</p>
       <p className='pIntro'>Keep track of all new releases from your favorite artists on Spotify.</p>
-
       <div className='logcontainer'>
-
         <div className='signup'>
           <Link to="/signup"> <strong>Sign Up</strong> </Link>
         </div>
         <div className='signup'>
           <Link to="/login"><strong>Log In</strong></Link>
         </div>
-
       </div>
     </div>
   )

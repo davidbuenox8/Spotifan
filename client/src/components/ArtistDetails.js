@@ -20,8 +20,6 @@ export default class ArtistDetails extends React.Component {
     userSavedAlbums: null,
   }
 
-
-
   getArtist = () => {
     axios.get(`/artist/${this.props.match.params.id}`)
       .then(response => {
@@ -30,7 +28,6 @@ export default class ArtistDetails extends React.Component {
           name: response.data.body.name,
           avatar: response.data.body.images[0].url,
           artistIdFromSpotify: response.data.body.id,
-
         })
       })
   }
@@ -51,6 +48,7 @@ export default class ArtistDetails extends React.Component {
         })
       })
   }
+
   unfollowButton = (event) => {
     event.preventDefault();
     axios.delete(`/api/artists/${this.state.artistIdFromSpotify}`)
@@ -61,7 +59,6 @@ export default class ArtistDetails extends React.Component {
         })
       })
   }
-
 
   userFollowedArtists = () => {
     axios.get('/api/users')
@@ -75,14 +72,12 @@ export default class ArtistDetails extends React.Component {
       })
   }
 
-
   componentDidMount() {
     this.userFollowedArtists()
     this.getArtist();
   }
 
   render() {
-
     const artist = this.state.artistObj;
     const artistsIds = this.state.userArtistsIds;
     const userSavedAlbums = this.state.userSavedAlbums;

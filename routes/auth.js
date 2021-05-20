@@ -6,10 +6,10 @@ const passport = require('passport');
 router.post('/signup', (req, res, next) => {
   // get username and password
   const { username, password } = req.body;
-  // is the password at least 8 chars
-  if (password.length < 1) {
+  // is the password at least 6 chars
+  if (password.length < 6) {
     // if not we show the signup form again with a message
-    return res.status(400).json({ message: 'Your password must contain 6 characters min' });
+    return res.status(400).json({ message: 'Your password must contain min 6 characters ' });
   }
   if (username === '') {
     return res.status(400).json({ message: 'Your username cannot be empty' });
@@ -30,7 +30,6 @@ router.post('/signup', (req, res, next) => {
         // create the user in the database
         User.create({ username: username, password: hash })
           .then(createdUser => {
-
             req.login(createdUser, err => {
               if (err) {
                 return res.status(500).json({ message: 'Error while attempting to login' })
@@ -82,9 +81,7 @@ router.get('/user', (req, res) => {
     .then(user => {
       user.followedArtists.filter(artist => { artist.artistId });
       res.status(200).json(user)
-
     })
-
 })
 
 module.exports = router;

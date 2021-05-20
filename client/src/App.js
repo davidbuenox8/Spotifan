@@ -21,15 +21,11 @@ class App extends React.Component {
     this.setState({ user });
   }
 
-
-
   render() {
-
     return (
       <div className="App">
         <Switch>
           <Route exact path='/' component={HomePage} />
-
           <Route
             exact path="/signup"
             render={props => <Signup setUser={this.setUser} {...props} />}
@@ -51,7 +47,6 @@ class App extends React.Component {
             redirectPath='/login'
             setUser={this.setUser}
           />
-
           <ProtectedRoute
             path='/artistSearch'
             user={this.state.user}
@@ -64,7 +59,6 @@ class App extends React.Component {
             component={ArtistDetails}
             redirectPath='/login'
           />
-
         </Switch>
       </div>
     );

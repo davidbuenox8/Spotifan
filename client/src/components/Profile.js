@@ -73,7 +73,6 @@ export default class Profile extends React.Component {
   }
 
   handleSubmit = e => {
-    console.log(e)
     const { chosenName, avatar } = this.state;
 
     e.preventDefault();

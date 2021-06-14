@@ -95,7 +95,6 @@ width: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-start ;
-  
 }
 
 .userpasscontainer input, .userpasscontainer label{
@@ -186,18 +185,12 @@ nav button{
 margin-left: 30px
 }
 
-
-
 .aritstcontainer{
   display: flex;
   flex-direction: column;
   align-items: baseline;
   margin-left: 20px;
 }
-
-
-
-
 
 .followButton{
   font-family: 'roboto', sans-serif;
@@ -293,8 +286,6 @@ border-radius: 7px;
   margin: 10px;
   width: 150px
 }
-
-
 
 .editcontainer div{
   margin: 0 auto;

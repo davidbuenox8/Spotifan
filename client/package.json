@@ -8,8 +8,8 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "browserlist": "^1.0.1",
     "cloudinary-react": "^1.7.0",
-    "css-what": "^5.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -20,6 +20,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,5 +43,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "browserslist": "^4.16.6",
+    "css-what": "^5.0.1",
+    "glob-parent": "^6.0.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "resolutions": {
+    "css-what": "^5.0.1"
   }
 }
